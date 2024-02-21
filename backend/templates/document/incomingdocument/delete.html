@@ -1,0 +1,241 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content%}
+{% include 'component/breadcrumb.html' with title=title %}
+
+<form action="{% if income_docu.id %}{% url 'delete_income_docu' income_docu.id %}{% endif %}"method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="text-right mb15">
+      <button type="submit" class="btn btn-info">
+        <i class="fa fa-plus mr5"></i>Lưu lại
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="panel-title">Thông tin chung</div>
+        <div class="panel-desription">
+          <p>Bạn có chắc chắn muốn xóa văn bản đến "<strong class="text-danger">{{ income_docu.summary}}</strong>" không?</p>
+      </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Cơ quan phát hành
+                                <span class="text-danger">(*)</span>
+                            </label>
+                            <input type="text" class="form-control" name="issuing_agency" value="{{ income_docu.issuing_agency }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">
+                                Cơ quan chủ quản
+                            </label>
+                            <input type="text" class="form-control" name="responsible_agency" value="{{ income_docu.responsible_agency }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Số ký hiệu
+                                <span class="text-danger">(*)</span>
+                            </label>
+                            <input type="text" class="form-control" name="reference_number" value="{{ income_docu.reference_number }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">
+                                Mức độ văn bản
+                            </label>
+                            {{form.level}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Số văn bản
+                                <span class="text-danger">(*)</span>
+                            </label>
+                            <select id="select1" name="document_type" class="form-control select2_demo_1 " tabindex="-1" aria-hidden="true" required>
+                                <option value="">---------------------------- Chọn số văn bản ----------------------------</option>
+                                {% for docutype in docutypes %}
+                                <option value="{{ docutype.id }}" {% if docutype.id|stringformat:"s" == form.instance.document_type.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ docutype.description }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">
+                                Loại văn bản
+                            </label>
+                           {{form.document_type}} 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Ngày nhận văn bản
+                                <span class="text-danger">(*)</span>
+                            </label>
+                            <input type="date" class="form-control" name="receipt_date" value="{% if income_docu.receipt_date %}{{ income_docu.receipt_date|date:'Y-m-d' }}{% endif %}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right"> Ngày ban hành văn bản<span class="text-danger">(*)</span>    
+                            </label>
+                            <input type="date" class="form-control" name="issuance_date" value="{% if income_docu.issuance_date %}{{ income_docu.issuance_date|date:'Y-m-d' }}{% endif %}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right"> Số hiện tại
+                                <span class="text-danger">(*)</span>
+                            </label>
+                            <input type="text" class="form-control" name="current_number" value="{{ income_docu.current_number }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">
+                                Số đến
+                            </label>
+                            <input type="text" class="form-control" name="arrival_number" value="{{ income_docu.arrival_number }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb15">
+                    <div class="col-lg-12 mb15">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Trích yếu
+                                <span class="text-danger">(*)</span>
+                            </label>
+                            <input type="text" class="form-control" name="summary" value="{{ income_docu.summary }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 ">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Ý kiến tham mưu (nếu có)
+                            </label>
+                            <input type="text" class="form-control" name="advisory_opinions" value="{{ income_docu.advisory_opinions }}" placeholder="Mời nhập thông tin" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                        <label for="" class="control-lable text-right"> Trạng thái lưu Hành </label>
+                        <select name="publish" class="form-control">
+                            <option value="1" {% if request.POST.publish == '1' %}selected{% endif %}>Đang lưu hành</option>
+                            <option value="0" {% if income_docu.publish == 0 %}selected{% endif %}>Lưu trữ văn bản</option>
+                      </select>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right" > Trạng thái xử lý</label>
+                            {{form.status}} 
+                        </div>
+                    </div>
+                </div>
+               
+
+              <div class="row mb15">
+                  <div class="col-lg-12 ">
+                      <div class="form-row">
+                          <div class="social-feed-box">
+                              <div class="social-avatar">
+                                {% if files %}
+                                <ul>
+                                  {% for file in files %}
+                                  <li>
+                                    {{ file.file.name }}
+                                    <a href="{{ file.file.url }}" target="_blank">Xem</a>
+                                  </li>
+                                  {% endfor %}
+                                </ul>
+                                {% endif %}
+                              </div>
+                            </div>
+                      </div>
+                  </div> 
+              </div>
+
+              <div class="row mb15">
+                
+                <div class="col-lg-4">
+                    <div class="form-row">
+                        <label for="" class="control-lable text-right" >Người tạo </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="created_date"
+                          value="{{income_docu.creator}}"
+                          placeholder="Mời nhập thông tin"
+                          readonly 
+                          autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-row">
+                        <label for="" class="control-lable text-right" >Ngày tạo </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          name="created_at"
+                          value="{% if income_docu.created_at %}{{ income_docu.created_at|date:'Y-m-d' }}{% endif %}"
+                          placeholder="Mời nhập thông tin"
+                          readonly 
+                          autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-row">
+                        <label for="" class="control-lable text-right">Ngày cập nhật </label>
+                        <input
+                        type="date"
+                        class="form-control"
+                        name="updated_at"
+                        value="{% if income_docu.updated_at %}{{ income_docu.updated_at|date:'Y-m-d' }}{% endif %}"
+                        placeholder="Mời nhập thông tin"
+                        readonly
+                        autocomplete="off"/>
+                    </div>
+                </div>
+
+            
+            </div>
+              
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="text-right mb15">
+    <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Lưu lại</button>
+</div>
+</div>
+</form>
+
+{% endblock main-content%}

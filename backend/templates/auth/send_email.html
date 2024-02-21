@@ -1,0 +1,43 @@
+{% load static %}
+<title>{%block title%}Đăng Ký- UHL{%endblock%}</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'component/head.html' %}
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown ">
+        <div class="m-t-lg">
+            <div >
+                <img width=300px, src="{%static 'assets/img/logo/logo-UHL.png'%}" alt="">
+            </div>
+            <h2 class="m-t-lg m-b-lg font-bold ">Quên Mật Khẩu</h2>
+           
+            {% if messages %}
+                
+                {% for message in messages %}
+                <p class="text-danger"><i>
+                    {{ message }}
+                </i></p>
+                {% endfor %}
+                
+            {% endif %}
+            <p>
+                Nhập địa chỉ email tài khoản của bạn.
+            </p>
+            <form class="m-t" role="form" method="post" action="{% url 'send_email' %}">
+                {% csrf_token %}
+                <div class="form-group  m-b-md">
+                    <input type="email" class="form-control" name="email" value="{{request.POST.email}}"  placeholder="Email" required="">
+                </div>
+                {% comment %} <button type="submit" class="btn btn-primary block full-width m-b">Xác nhận email</button> {% endcomment %}
+                <button type="submit" class="btn btn-primary full-width m-b"  data-style="zoom-in">Xác nhận email</button>
+            </form>
+            <p class="m-t"> <small>Bản quyền thuộc Đại học Hạ Long &copy; 2024</small> </p>
+        </div>
+    </div>
+  
+    {% include 'component/script.html' %}
+</body>
+
+</html>

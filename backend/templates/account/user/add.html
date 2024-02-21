@@ -1,0 +1,174 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content%}
+
+{% include 'component/breadcrumb.html' with title=title %}
+
+{% if error_messages %}
+  <div class="alert alert-danger alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <strong>Lỗi nhập liệu:</strong>
+    <ul>
+      {% for message in error_messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+<form method="post" action="{% url 'add_user' %}" class="box" onsubmit="return validatePassword()">
+    {% csrf_token %}  
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="text-right mb15">
+            <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Lưu lại</button>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="panel-title">Thông tin chung</div>
+                <div class="panel-desription">
+                    <p>Nhập thông tin tài khoản</p>
+                    <p>Lưu ý: Những trường đánh dấu <span class="text-danger">(*)</span> là bắt buộc</p>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row mb15">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Họ
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="first_name" value="{{ request.POST.first_name }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Tên
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input  name="last_name" value="{{ request.POST.last_name }}" class="form-control required email" aria-required="true" placeholder="Mời nhập thông tin" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb15">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Tên đăng nhập
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="username" value="{{ request.POST.username }}" placeholder="Mời nhập thông tin" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Email
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input id="email" name="email" value="{{ request.POST.email }}" type="Email" class="form-control required email" placeholder="Mời nhập thông tin" aria-required="true" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb15">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Mật mật khẩu
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Mời nhập thông tin" aria-required="true" aria-invalid="true" required>      
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Nhập lại mật khẩu
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <span id="confirmError" class="text-danger error-message"></span>
+                                    <input id="confirm" name="confirm" type="password" class="form-control" placeholder="Mời nhập thông tin" aria-required="true" aria-invalid="true" required>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb15">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Trạng thái
+                                    </label>
+                                    {{form.is_active}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Nhân viên
+                                    </label>
+                                    {{form.is_staff}}
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row mb15">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Quản trị tối cao
+                                    </label>
+                                    {{form.is_superuser}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Ngày tham gia
+                                    </label>
+                                    {{form.date_joined}}
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row mb15">
+                            <div class="col-lg-12">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Nhóm người dùng
+                                    </label>
+                                    {{form.groups}}
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="row mb15">
+                            <div class="col-lg-12">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Quyền người dùng
+                                    </label>
+                                    {{form.user_permissions}}
+                                </div>
+                            </div>                            
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+   
+function validatePassword() {
+        var passwordField = document.getElementById('password');
+        var confirmField = document.getElementById('confirm');
+        var confirmError = document.getElementById('confirmError');
+
+        if (confirmField.value !== passwordField.value) {
+            confirmError.textContent = 'Nhập lại mật khẩu không khớp';
+            return false;
+        } else {
+            confirmError.textContent = '';
+            return true;
+        }
+}
+</script>
+
+{% endblock main-content%} 
+

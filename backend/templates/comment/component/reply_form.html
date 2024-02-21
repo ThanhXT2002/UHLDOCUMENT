@@ -1,0 +1,9 @@
+<form method="post" action="{% url 'add_reply' comment.id %}" class="reply-form" id="reply-form-{{ comment.id }}" style="display:none;">
+    {% csrf_token %}
+    <div class="form-group m-t-sm">
+        <textarea class="form-control" name="content" placeholder="Message"></textarea>
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Gửi phản hồi</strong></button>
+    </div>
+</form>

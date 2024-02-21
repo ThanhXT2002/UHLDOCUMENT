@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% load static %}
+{%block title%} Danh sách công việc{%endblock%}
+ {% block main-content%}
+{% include 'component/breadcrumb.html' with title=title %}
+<div class="wrapper wrapper-content  fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5 class="text-uppercase">{{title}}</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {% include 'work/task/component/filter_list.html' %}
+                <div class="table-responsive">
+                    <table class=" footable table table-striped table-bordered table-hover dataTables-example toggle-arrow-tiny">
+                      <thead>
+                        <tr>
+                          <th data-toggle="true">Tiêu đề</th>
+                          <th class="text-center">Tình trạng</th>
+                          <th class="text-center">Độ ưu tiên</th>
+                          <th class="text-center">Tiến độ hoàn thành</th>
+                          
+                  
+                  
+                          <th data-hide="all">Mô tả</th>
+                          <th data-hide="all">Thời gian diễn ra</th>
+                          <th data-hide="all">Ngày tạo</th>
+                          <th data-hide="all">Cập nhật gần đây</th>
+                          <th data-hide="all">Người tạo</th>
+                          <th data-hide="all">Thành viên</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for task in tasks %}
+                        <tr class="gradeX">
+                          <td class="project-title"><a href="{% url 'task_detail' task_url=task.url %}" class="link-message ">{{task.title}}</a></td>
+                  
+                          <td class="text-center">
+                            {% if task.get_status_display == "Chưa hoạt động" %}
+                            <span class="label label-info">{{ task.get_status_display }}</span>
+                          {% elif task.get_status_display == "Đang hoạt động"%}
+                              <span class="label label-primary">{{ task.get_status_display }}</span>
+                          {% elif task.get_status_display == "Hoàn thành"%}
+                              <span class="label label-success">{{ task.get_status_display }}</span>
+                          {% else%}
+                              <span class="label label-warning">{{ task.get_status_display }}</span>
+                          {% endif %}
+
+                          <td class="text-center">
+                            {% if task.get_priority_display == "Bình thường" %}
+                            <span class="font-bold">{{ task.get_priority_display }}</span>
+                          {% elif task.get_priority_display == "Thấp"%}
+                              <span class="text-warning font-bold">{{ task.get_priority_display }}</span>
+                          {% elif task.get_priority_display == "Cao"%}
+                              <span class="text-primary font-bold">{{ task.get_priority_display }}</span>
+                          {% elif task.get_priority_display == "Khẩn cấp"%}
+                              <span class="text-danger font-bold">{{ task.get_priority_display }}</span>
+                          {% elif task.get_priority_display == "Quan trọng"%}
+                              <span class="text-success font-bold">{{ task.get_priority_display }}</span>
+                          {% elif task.get_priority_display == "Xem xét"%}
+                              <span class="text-muted font-bold">{{ task.get_priority_display }}</span>
+                          {% elif task.get_priority_display == "Tự do"%}
+                              <span class="text-info font-bold">{{ task.get_priority_display }}</span>
+                          {% endif %}
+                            {% comment %} <span class="text-danger">{{ task.get_priority_display }}</span> {% endcomment %}
+                          </td>
+                        </td>
+                          <td class="text-center">
+                            <small>Tiến độ hoàn thành: {{task.sum_progress}}%</small>
+                            <div class="progress progress-mini">
+                                <div style="width: {{task.sum_progress}}%;" class="progress-bar"></div>
+                            </div>
+                          </td>
+                  
+
+                  
+                          <td class="text-center ">{{ task.description }}</td>
+                          <td>{{ task.start_date }} --- {{ task.end_date }}</td>
+                          <td class="text-center">{{ task.created_date }}</td>
+                          <td class="text-center">{{ task.updated_date }}</td>
+                          <td class="text-center">{{ task.creator }}</td>
+                          <td class="project-people">
+                            {% for image_url in task.get_account_images %}
+                                  <a href=""><img alt="image" class="img-circle img-sm " src="{{ image_url }}"></a>
+                              {% endfor %}
+                          </td>
+                      
+                          
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Tiêu đề</th>
+                          <th class="text-center">Tình trạng</th>
+                          <th class="text-center">Độ ưu tiên</th>
+                          <th class="text-center">Tiến độ hoàn thành</th>
+                          
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content%}

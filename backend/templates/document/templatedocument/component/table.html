@@ -1,0 +1,68 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover dataTables-example">
+      <thead>
+        <tr>
+          <th>Trích yếu</th>
+          <th>Loại văn bản</th>
+          <th>Nguồn gốc</th>
+          <th>Số hiệu</th>
+          <th class="text-center">Trạng thái</th>
+          <th class="text-center">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tem_docu in tem_docus %}
+        <tr class="gradeX">
+          <td>{{ tem_docu.summary }}</td>
+          <td>{{ tem_docu.document_type}}</td>
+          <td>{{ tem_docu.origin }}</td>
+          <td>{{ tem_docu.number }}</td>
+          <td class="text-center"> 
+            <input type="checkbox" {% if tem_docu.status %}checked{% endif %} class="js-switch status" data-model="tem_docu" data-field="status" data-modelId="{{ tem_docu.id }}">   
+        </td>
+          <td class="text-center">
+            <a href="{% url 'edit_tem_docu' tem_docu.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+            <a href=" {% url 'delete_tem_docu' tem_docu.id %}  " class="btn btn-danger"><i class="fa fa-trash"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+            <th>Trích yếu</th>
+            <th>Loại văn bản</th>
+            <th>Nguồn gốc</th>
+            <th>Số hiệu</th>
+            <th>Trạng thái</th>
+            <th class="text-center operation">Thao tác</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện khi checkbox status thay đổi
+        $('.status').change(function () {
+            var id = $(this).data('modelid');
+            var isChecked = $(this).prop('checked');
+
+            // Gửi yêu cầu AJAX để cập nhật trạng thái
+            $.ajax({
+                type: 'POST',
+                url: '/update_status_tem_docu/',  // Đặt đường dẫn URL cập nhật trạng thái ở đây
+                data: {
+                    'id': id,
+                    'status': isChecked ? '1' : '0',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // Thêm token CSRF để bảo vệ khỏi tấn công CSRF
+                },
+                success: function (data) {
+                    console.log('Cập nhật trạng thái thành công');
+                },
+                error: function () {
+                    console.log('Lỗi khi cập nhật trạng thái');
+                }
+            });
+        });
+    });
+</script>

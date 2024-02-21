@@ -1,0 +1,47 @@
+{% if comment.get_reply_count > 0 %}
+      {% for reply in comment.get_all_replies %}
+      <div class="social-avatar m-l-xl">
+          <a href="" class="pull-left">
+              <img alt="image" class="img-sm img-circle" src="/upload/{{reply.user.account.image}}">
+          </a>
+          <div class="media-body">
+            {% load tz %}
+            {% with time_difference=reply.created_date|timesince:now %}
+                <small class="pull-right">{{ time_difference|default:"just now" }}</small>
+            {% endwith %}
+            <strong>{{reply.user.get_full_name}} - <span class="text-info">đã trả lời:</span> [ {{ reply.parent_comment.user.get_full_name }} ]</strong>
+            <br>
+              <small class="text-muted">{{reply.created_date}}</small>
+          </div>
+      </div>
+      <div class="social-body m-l-xl">
+          <div class="well" >
+            {{ reply.content }}   
+          </div>
+          <div class="uk-flex uk-flex-middle uk-flex-space-between">
+            <div>
+                <a href="javascript:void(0);" id="like-btn-{{ reply.id }}" class="btn-xs btn-white p-xxs" onclick="toggleLike({{ reply.id }})">
+                    {% if reply in liked_comments %}
+                        <i class="fa fa-thumbs-up bg-success p-xxs b-r-xl">Unlike</i> <span class="like-text"> Lượt thích {{ reply.get_like_count }}</span>
+                    {% else %}
+                        <i class="fa fa-thumbs-o-up"></i> Like <span class="like-text"> Lượt thích {{ reply.get_like_count }}</span>
+                    {% endif %}
+                </a>
+                <button class="btn-xs btn-white p-xxs m-l-xs" onclick="toggleReplyForm('reply-form-{{ reply.id }}')">
+                    <i class="fa fa-mail-reply"></i> Reply
+                </button>
+            </div>
+            <div>
+              {% if user.is_authenticated and reply.user == user %}
+              <a href="{% url 'delete_comment' reply.id %}" class="text-primary m-r-md" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
+                  <i class="fa fa-trash m-r-xs"></i>Xóa
+              </a>
+              <span class="btn text-primary" onclick="toggleEditForm('edit-form-{{ reply.id }}')" ><i class="fa fa-edit m-r-xs"></i>Chỉnh sửa</span>
+          {% endif %}
+            </div>
+          </div>
+        {% include 'comment/component/edit_form.html' with comment=reply %}
+        {% include 'comment/component/reply_form.html' with comment=reply %}        
+      </div>
+      {% endfor %}
+  {% endif %}

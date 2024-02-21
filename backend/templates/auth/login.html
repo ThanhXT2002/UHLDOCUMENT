@@ -1,0 +1,48 @@
+{% load static %}
+<title>Đăng Nhập - UHL</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'component/head.html' %}
+</head>
+<body class="gray-bg p-b-xl">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <img width=300px, src="{%static 'assets/img/logo/logo-UHL.png'%}" alt="">
+            </div>
+            <h3 class="m-t-md m-b-md">Chào mừng đến với hệ thống quản lý của trường đại học hạ long</h3>
+            {% if messages %}
+                <p class="text-danger"><i>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </i></p>
+            {% endif %}
+            
+            {% if warning_message %}
+                <div class="alert alert-warning">
+                    {{ warning_message }}
+                </div>
+            {% endif %}
+            <form class="m-t" role="form" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" value="{{ request.POST.username }}"  placeholder="Tên đăng nhập" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" value="{{request.POST.password}}"  placeholder="Mật khẩu" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width">Đăng nhập</button>
+                <a href="{% url 'send_email' %}" class="text-navy"><p class="text-center m-t-md m-b-xs ">Quên mật khẩu?</p></a>
+                <p class="text-muted text-center">Bạn chưa có tài khoản?</p>
+                <a class="btn btn-sm btn-white btn-block" href="{% url 'register' %}">Đăng ký</a>
+            </form>
+            <p class="m-t"> <small>Bản quyền thuộc Đại học Hạ Long &copy; 2024</small> </p>
+        </div>
+    </div>
+    {% include 'component/script.html' %}
+</body>
+</html>
+
+

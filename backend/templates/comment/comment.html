@@ -1,0 +1,91 @@
+<div class="social-feed-box ">
+    <div class="social-avatar">
+        <a href="" class="pull-left">
+            <img alt="image" class="img-sm img-circle" src="/upload/{{comment.user.account.image}}">
+        </a>
+        <div class="media-body">
+          {% load tz %}
+          {% with time_difference=comment.created_date|timesince:now %}
+              <small class="pull-right">{{ time_difference|default:"just now" }}</small>
+          {% endwith %}
+          <strong>{{comment.user.get_full_name}}</strong>
+          <br>
+            <small class="text-muted">{{comment.created_date}}</small>
+        </div>
+    </div>
+    <div class="social-body">
+        <div class="well" >
+          {{ comment.content }}   
+        </div>
+        <div class="uk-flex uk-flex-middle uk-flex-space-between">
+          <div>
+              <a href="javascript:void(0);" id="like-btn-{{ comment.id }}" class="btn-xs btn-white p-xxs" onclick="toggleLike({{ comment.id }})">
+                  {% if comment in liked_comments %}
+                      <i class="fa fa-thumbs-up bg-success p-xxs b-r-xl">Unlike</i> <span class="like-text"> Lượt thích {{ comment.get_like_count }}</span>
+                  {% else %}
+                      <i class="fa fa-thumbs-o-up"></i> Like <span class="like-text"> Lượt thích {{ comment.get_like_count }}</span>
+                  {% endif %}
+              </a>
+              <button class="btn-xs btn-white p-xxs m-l-xs" onclick="toggleReplyForm('reply-form-{{ comment.id }}')">
+                  <i class="fa fa-mail-reply"></i> Reply
+              </button>
+          </div>
+          <div>
+            {% if user.is_authenticated and comment.user == user %}
+                <a href="{% url 'delete_comment' comment.id %}" class="text-primary m-r-md" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
+                    <i class="fa fa-trash m-r-xs"></i>Xóa
+                </a>
+                <span class="btn text-primary" onclick="toggleEditForm('edit-form-{{ comment.id }}')" ><i class="fa fa-edit m-r-xs"></i>Chỉnh sửa</span>
+            {% endif %}
+        </div>
+        </div>
+        {% include 'comment/component/edit_form.html' with comment=comment %}
+        {% include 'comment/component/reply_form.html' with comment=comment %}
+    </div>
+    {% include 'comment/component/replies.html' with comment=comment %}
+</div>
+
+<script>
+    function toggleReplyForm(formId) {
+        const replyForm = document.getElementById(formId);
+        replyForm.style.display = (replyForm.style.display === 'none' || replyForm.style.display === '') ? 'block' : 'none';
+    }
+    function toggleEditForm(formId) {
+         const editForm = document.getElementById(formId);
+         editForm.style.display = (editForm.style.display === 'none' || editForm.style.display === '') ? 'block' : 'none';
+        
+    }
+    {% comment %} =========Like============= {% endcomment %}
+    async function toggleLike(commentId) {
+        try {
+            const response = await fetch(`/toggle_like/${commentId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Toggle like request failed');
+            }
+
+            const data = await response.json();
+            const likeBtn = document.getElementById(`like-btn-${commentId}`);
+            const likeText = likeBtn.querySelector('.like-text');
+            const likeIcon = likeBtn.querySelector('i');
+
+            likeText.textContent = `Lượt thích ${data.likes_count}`;
+            likeIcon.className = data.user_has_liked
+                ? 'fa fa-thumbs-up bg-success p-xxs b-r-xl'
+                : 'fa fa-thumbs-o-up';
+            likeIcon.textContent = data.user_has_liked ? 'Unlike' : 'Like';
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+  }
+</script>

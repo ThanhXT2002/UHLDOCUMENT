@@ -1,0 +1,113 @@
+{% load custom_filters %}
+    <div class="filter-wrapper">
+        <div class="uk-flex uk-flex-middle uk-flex-space-between">
+            <div class="perpage">
+                <div class="uk-flex uk-flex-middle uk-flex-space-between">
+                    {% if weeks.has_previous %}
+                        <a class="page-link btn btn-info " href="?page={{ weeks.previous_page_number }}" aria-label="Previous">
+                            Trang trước
+                        </a>
+                 {% endif %}
+                 <select width="150px" class="form-control select2fillter m-r-none" onchange="location.href=this.value;">
+                    {% with total_pages=weeks.paginator.num_pages %}
+                        {% for num in total_pages|get_range reversed %}
+                            <option width="150px" value="?page={{ num }}" {% if num == weeks.number %}selected{% endif %}>Tuần {{ num }}</option>
+                        {% endfor %}
+                    {% endwith %}
+                </select>
+                    {% if weeks.has_next %}
+                        <a class="page-link btn btn-info" href="?page={{ weeks.next_page_number }}" aria-label="Next">
+                            Trang sau
+                        </a>
+                    {% endif %}
+                   
+                </div>
+                   
+            </div>
+            <div class="action">
+                <div class="uk-flex uk-flex-middle">
+                    <div class="uk-search uk-flex uk-flex-middle">
+                        <form method="GET" action="{% url 'search_schedule' %}">
+                        <div class="input-group">
+                            
+                            <input 
+                                type="text"
+                                name="q"
+                                value=""
+                                placeholder="Nhập từ khóa........"
+                                class="form-control" >
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-success mb0 btn-xl mr10">
+                                    Tìm kiếm
+                                </button>
+                            </span>
+                        
+                        </div>
+                    </form>
+                    </div> 
+                    <a href="{% url 'add_schedule' %}" class="btn btn-danger"><i class="fa fa-plus mr5"></i>Thêm lịch công tác</a>       
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% comment %} <script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi giá trị trong combobox thay đổi
+        $("#weekSelector").change(function () {
+            var selectedWeekId = $(this).val();
+            
+            // Kiểm tra nếu người dùng chọn "Tuần hiện tại"
+            if (selectedWeekId === 'current') {
+                // Thực hiện Ajax request để lấy lịch công tác của tuần hiện tại
+                $.ajax({
+                    url: "{% url 'current_week_schedule' %}",
+                    success: function (data) {
+                        // Hiển thị dữ liệu lịch công tác
+                        $("#scheduleContainer").html(data);
+                    }
+                });
+            } else {
+                // Nếu người dùng chọn một tuần khác, thực hiện Ajax request để lấy lịch công tác của tuần đó
+                $.ajax({
+                    url: "{% url 'week_schedule' 0 %}" + selectedWeekId + "/",
+                    success: function (data) {
+                        // Hiển thị dữ liệu lịch công tác
+                        $("#scheduleContainer").html(data);
+                    }
+                });
+            }
+        });
+    });
+</script> {% endcomment %}
+
+{% comment %} <script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi giá trị trong combobox thay đổi
+        $("#weekSelector").change(function () {
+            var selectedWeekId = $(this).val();
+            
+            // Kiểm tra nếu người dùng chọn "Tuần hiện tại"
+            if (selectedWeekId === 'current') {
+                // Thực hiện Ajax request để lấy lịch công tác của tuần hiện tại
+                $.ajax({
+                    url: "{% url 'current_week_schedule' %}",
+                    success: function (data) {
+                        // Hiển thị dữ liệu lịch công tác
+                        $("#scheduleContainer").html(data);
+                    }
+                });
+            } else {
+                // Nếu người dùng chọn một tuần khác, thực hiện Ajax request để lấy lịch công tác của tuần đó
+                $.ajax({
+                    url: "{% url 'week_schedule_ajax' 0 %}" + selectedWeekId + "/",  // Sửa đổi đường dẫn tại đây
+                    success: function (data) {
+                        // Hiển thị dữ liệu lịch công tác
+                        $("#scheduleContainer").html(data);
+                    }
+                });
+            }
+        });
+    });
+</script> {% endcomment %}

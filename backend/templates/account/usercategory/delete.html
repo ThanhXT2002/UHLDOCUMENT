@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2><strong>Xóa chức vụ</strong></h2>
+        <ol class="breadcrumb" style="margin-bottom:10px">
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li class="active"><strong>Xóa chức vụ</strong></li>
+        </ol>
+    </div>
+</div>
+<form action="{% url 'delete_user_category' usercategorys.id %}" method="post" class="box">
+    {% csrf_token %}  
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel-title">Xác nhận xóa</div>
+                <div class="panel-desription">
+                    <p>Bạn có chắc chắn muốn xóa loại thành viên "{{ usercategorys.user_category_name }}" không?</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row mb15">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">Tên loại thành viên
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="user_category_name" value="{{ usercategorys.user_category_name }}" placeholder="Mời nhập thông tin" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-lable text-right">
+                                        Mô tả       
+                                    </label>
+                                    <input type="text" class="form-control" name="description" value="{{ usercategorys.description }}" placeholder="Mời nhập thông tin" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right mb15">
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash mr5"></i>Xác nhận xóa</button>
+        </div>
+    </div>
+</form>
+{% endblock main-content %}

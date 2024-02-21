@@ -1,0 +1,201 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content%}
+{% include 'component/breadcrumb.html' with title=title %}
+
+<form action="{% if notification.url %}{% url 'edit_notification' notification_url=notification.url %}{% endif %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="text-right mb15">
+        <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Lưu lại</button>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel-title">Thông tin chung</div>
+            <div class="panel-desription"><p>Nhập thông tin của thông báo</p>
+                <p>Lưu ý: Những trường đánh dấu <span class="text-danger">(*)</span> là bắt buộc</p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row mb15">
+                        <div class="col-lg-12 mb15">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Tên thông báo
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                                <input type="text" class="form-control" name="title" value="{{ notification.title}}" placeholder="Mời nhập thông tin" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb15">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">
+                                    Url    
+                                </label>
+                                <input type="text" class="form-control" name="url" value="{{ notification.url}}" placeholder="Mời nhập thông tin" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb15">
+                        <div class="col-lg-12">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Nội dung
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                               
+                                <textarea class="summernote inbox-textarea form-control mb15" name="content" style="display: none;">{{ notification.content}}</textarea>
+                               
+                            </div>
+                        </div> 
+                       
+                    <div class="row mb15 ">
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right m-t-md">
+                                   Ngày bắt đầu      
+                                </label>
+                                <input 
+                                    type="date" 
+                                    class="form-control"
+                                    name="start_date"
+                                    value="{% if notification.start_date %}{{ notification.start_date|date:'Y-m-d' }}{% endif %}"
+                                    autocomplete="off"
+                                    >
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right m-t-md ">
+                                    Ngày kết thúc      
+                                </label>
+                                <input 
+                                type="date" 
+                                class="form-control"
+                                name="end_date"
+                                value="{% if notification.end_date %}{{ notification.end_date|date:'Y-m-d' }}{% endif %}"
+                                autocomplete="off"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb15">
+                        <div class="col-lg-12">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right  m-t-md">
+                                   Người nhận      
+                                </label>
+                                {{form.recipients}}
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row mb15">
+                        <div class="col-lg-12 ">
+                            <div class="form-row ">
+                                <label for="" class="control-lable text-right">
+                                    <div class="form-row text-center d-flex align-items-center">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus mr5" ></i>Thêm file</button>       
+                                    </div>    
+                                </label>
+                                {{ form.uploadfile}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb15">
+                        <div class="col-lg-12 ">
+                            <div class="form-row">
+                                <div class="social-feed-box">
+                                    <div class="social-avatar">
+                                      {% if files %}
+                                      <ul>
+                                        {% for file in files %}
+                                        <li>
+                                          {{ file.file.name }}
+                                          <a href="{{ file.file.url }}" target="_blank">Xem</a>
+                                        </li>
+                                        {% endfor %}
+                                      </ul>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row mb15">
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                            <label for="" class="control-lable text-right"> Trạng thái </label>
+                                <select name="status" class="form-control">   
+                                    <option value="1" {% if notification.status == 1 %}selected{% endif %}>Xuất bản</option>
+                                    <option value="0" {% if notification.status == 0 %}selected{% endif %}>Ngưng xuất bản</option>
+                                </select>
+                            </div>
+    
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right" >Người tạo</label>
+                                    <input
+                                    type="text"
+                                    class="form-control"
+                                    name="creator"
+                                    value="{{notification.sender}}"
+                                    placeholder="Mời nhập thông tin"
+                                    readonly 
+                                    autocomplete="off"
+                                    />
+                        </div>
+                    </div>
+                    
+                  </div>
+                
+                <div class="row mb15">
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right" >Ngày tạo </label>
+                            <input
+                            type="date"
+                            class="form-control"
+                            name="created_date"
+                            value="{% if notification.created_date %}{{ notification.created_date|date:'Y-m-d' }}{% endif %}"
+                            placeholder="Mời nhập thông tin"
+                            readonly 
+                            autocomplete="off"
+                        />
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-6">
+                        <div class="form-row">
+                            <label for="" class="control-lable text-right">Ngày cập nhật </label>
+                            <input
+                            type="date"
+                            class="form-control"
+                            name="updated_date"
+                            value="{% if notification.updated_date %}{{ notification.updated_date|date:'Y-m-d' }}{% endif %}"
+                            placeholder="Mời nhập thông tin"
+                            readonly
+                            autocomplete="off"/>
+                        </div>
+                    </div>
+    
+                
+                </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="text-right mb15">
+            <button type="submit" id="submitButton" class="btn btn-info "><i class="fa fa-plus mr5"></i>Lưu lại</button>
+        </div>
+    </div>
+    
+    </div>
+</form>
+
+{% include 'component/uploadfile.html' %}
+
+{% endblock main-content%}

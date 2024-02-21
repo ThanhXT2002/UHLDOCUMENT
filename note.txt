@@ -1,0 +1,412 @@
+django-admin startproject projectname
+python manage.py runserver
+python manage.py startapp
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py check: kiểm tra cú pháp lỗi trong mã nguồn
+venv\Scripts\activate
+
+
+
+Bot crawler là một giải pháp được thiết kế để tự động thu thập thông tin trên internet bằng cách sử dụng các chương trình 
+máy tính tự động gọi là bot hoặc web crawler. Đây là một phương tiện quan trọng trong việc trích xuất dữ liệu từ các trang 
+web và hệ thống thông tin trực tuyến khác nhau. Dưới đây là một số thông tin giới thiệu về giải pháp bot crawler:
+
+1.Mục đích chính:
+
+Thu thập dữ liệu: Bot crawler được sử dụng để tự động thu thập dữ liệu từ các trang web và nguồn thông tin trực tuyến khác 
+nhau. Điều này có thể bao gồm văn bản, hình ảnh, thông tin sản phẩm, giá cả, đánh giá, tin tức, và nhiều loại dữ liệu khác.
+
+Cập nhật thông tin: Bot crawler thường được sử dụng để cập nhật thông tin theo thời gian, giúp người dùng theo dõi sự thay 
+đổi và cập nhật trong lĩnh vực cụ thể.
+
+Phân tích dữ liệu: Dữ liệu thu thập được từ bot crawler có thể được sử dụng để phân tích xu hướng, dự báo thị trường, 
+nghiên cứu người tiêu dùng, và đưa ra quyết định kinh doanh thông minh.
+
+2.Cách hoạt động:
+
+Bot crawler hoạt động bằng cách tự động điều hướng qua các trang web và thu thập dữ liệu dựa trên các quy tắc đã được định 
+trước.
+
+Chúng thường sử dụng giao thức HTTP để gửi yêu cầu đến server và nhận phản hồi. Các trang web thường xác định và quản 
+lý bot crawler bằng cách sử dụng robots.txt hoặc các biện pháp bảo mật khác.
+
+Bot crawler có thể được lập lịch để chạy định kỳ hoặc kích hoạt theo yêu cầu, tùy thuộc vào nhu cầu cụ thể của người 
+sử dụng.
+
+3.Thách thức và biện pháp bảo mật:
+
+Bot crawler thường phải đối mặt với thách thức từ các trang web như hạn chế tần suất truy cập, kiểm soát bot, 
+và các biện pháp bảo mật khác để ngăn chặn việc thu thập dữ liệu không đều đặn hoặc gây quấy rối.
+
+Việc sử dụng bot crawler cần tuân thủ các quy định và điều kiện của các trang web để tránh việc vi phạm quyền 
+riêng tư và pháp luật.
+
+4.Ứng dụng:
+
+Có nhiều lĩnh vực sử dụng bot crawler như giám sát giá cả, nghiên cứu thị trường, theo dõi xu hướng công nghiệp, 
+thu thập thông tin cho SEO, và nhiều mục đích khác trong lĩnh vực kinh doanh và nghiên cứu.
+=>
+Bot crawler là một công cụ mạnh mẽ nhưng cũng đòi hỏi sự chú ý đặc biệt đối với vấn đề bảo mật và tuân thủ quy 
+định để đảm bảo việc sử dụng hiệu quả và hợp pháp.
+
+
+8.1. Mục đích
+- Quản lý văn bản nội bộ: cho phép phát hành văn bản điện tử nội bộ, gửi văn bản đến
+toàn đơn vị hoặc cá nhân hay một nhóm người dùng, phê duyệt văn bản
+- Theo dõi tình trạng văn bản: cho phép theo dõi quá trình xử lý văn bản theo quy trình
+của đơn vị, xem được tình trạng hiện tại của văn bản đang ở bộ phận nào, tình hình
+xử lý đến đâu. Việc phê duyệt văn bản trên hành chính điện tử có hiệu lực tương
+đương chữ kí phê duyệt trên văn bản giấy (trừ các trường hợp bắt buộc cần phải có
+chữ kí phê duyệt trên văn bản giấy) 
+- Phân công công việc: cho phép trưởng các bộ phận phân công công việc cho các
+thành viên thuộc bộ phận mình quản lý và theo dõi giám sát được kết quả thực hiện
+trên hệ thống
+- Lịch công tác: cho phép tạo lịch công tác của nhà trường, của đơn vị. Xem lịch công
+tác toàn trường và theo từng đơn vị, từng cá nhân. Lịch công tác của cá nhân là tổng
+hợp cả lịch giảng dạy và các lịch liên quan khác. 
+- Hòm thư nội bộ: cho phép gửi nhận thư nội bộ trong trường, các văn bản nội bộ cũng
+có thể được gửi đến cá nhân, nhóm người liên quan.
+- Tra cứu thông tin văn bản: cho phép tìm kiếm, tra cứu, trích xuất văn bản theo phân
+quyền 
+- Báo cáo, thống kê cho phép in ra các báo cáo, thống kê theo nghiệp vụ của công tác
+văn thư, lưu trữ
+8.2. Tác nhân
+- Cán bộ Phòng Tổ chức - Hành chính
+- Cán bộ quản lý
+- Lãnh đạo ĐH CNTT
+- Cán bộ, giảng viên
+
+
+
+CSDL:
+
+* Bảng tài khoản người dùng:
+- id
+- tên
+- ngày sinh(date)
+- giới tính(boolean)
+- email
+- sdt
+- mật khẩu(password)
+- ảnh đại diện
+- địa chỉ
+- trạng thái (boolean)
+- id đơn vị(phòng ban) công tác
+- id chức vụ 
+- id loại tài khoản
+
+* Bảng loại chức vụ:
+- id 
+- tên chức vụ
+- mô tả
+- trạng thái (boolean)
+
+* Bảng loại đơn vị(phòng ban) công tác
+- id 
+- người đứng đầu phòng bàn
+- tên đơn vị - phòng ban
+- mô tả
+- trạng thái (boolean)
+- địa chỉ
+
+* Bảng loại tài khoản người dùng:
+- id 
+- tên loại tài khoản
+- mô tả
+- trạng thái (boolean)
+
+* Bảng quản lý thông báo:
+- id 
+- Tiêu đề thông báo
+- ngày bắt đầu
+- ngày kết thúc
+- nội dung
+- trạng thái (boolean)
+- file đính kèm(doc, pdf,excel, ....)
+- ghi chú
+
+* Bảng quản lý lịch công tác (Trường, đơn vị(phòng ban), cá nhân):
+- id 
+- tuần thứ của năm
+- năm
+- từ ngày
+- đến ngày
+- ngày công tác
+- sáng hay chiều(boolean)
+- thời gian(chọn giờ, chọn phút)
+- địa điểm
+- lãnh đạo chủ trì
+- Thành phần
+- chuẩn bị
+- nội dung
+- xuất bản lịch(boolean)
+- ghi chú
+
+* Bảng loại văn bản:
+- id 
+- tên văn bản
+- mô tả
+- trạng thái (boolean)
+
+* Bảng thiết lập văn bản mẫu (công văn, tờ trình, quyết định):
+- id 
+- id loại văn bản
+- mức độ
+- trích yếu (mô tả ngắn của văn bản)
+- ngày tạo
+- ngày sửa
+- trạng thái (boolean)(boolean)
+- file đính kèm
+- ghi chú
+
+* Bảng quản lý văn bản đến:
+- id 
+- tên cơ quan ban Hành
+- tên cơ quan chủ quản
+- số ký hiệu
+- mức độ văn bản
+- số văn bản
+- id loại văn bản
+- ngày nhận văn bản
+- ngày ban hành văn bản
+- số hiện tại
+- số đến
+- văn bản lưu trữ(boolean)
+- cho phép tất cả các cơ quan được xem(boolean)
+- trích yếu (mô tả ngắn của văn bản)
+- ý kiến tham mưu
+- file đính kèm
+- trạng thái (boolean)
+
+* Bảng quản lý văn bản đi::
+- id 
+- số ký hiệu
+- mức độ văn bản
+- số văn bản
+- id loại văn bản
+- ngày gửi văn bản
+- ngày ban hành văn bản
+- số hiện tại
+- số đi
+- văn bản lưu trữ(boolean)
+- cho phép tất cả các cơ quan được xem(boolean)
+- trích yếu (mô tả ngắn của văn bản)
+- ý kiến tham mưu
+- file đính kèm
+- trạng thái (boolean)
+
+* Bảng quản lý giao việc và xử lý công việc:
+- id 
+- ngày bắt đầu
+- ngày kết thúc
+- nội dung xử lý
+- file đính kèm
+- cá nhân sử lý(liên kết đến bảng tài khoản người dùng)
+- trạng thái (boolean)
+- tiến độ xử lý
+
+
+
+
+
+
+
+from typing import Any
+from django.db import models
+from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.text import slugify
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
+from django.utils import timezone
+
+
+class CustomUserManager(UserManager):
+    def _create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError("You have not provided a valid e-email addres ")
+        
+        email = self.normalize_email(email)
+        user = self.model(email = email, **extra_fields)
+        user.set_password(password)
+        user.save(using = self.db)
+        
+        return user
+    
+    def _create_user(self, email = None, password= None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+    
+    def create_superuser(self, email = None, password= None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self._create_user(email, password, **extra_fields)
+
+class Department(models.Model):
+    head_of_department = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
+    department_name = models.CharField(max_length=255)
+    description = HTMLField()
+    status = models.BooleanField(default=True)
+    address = models.CharField(max_length=255)
+
+class Position(models.Model):
+    position_name = models.CharField(max_length=255)
+    description = models.TextField()
+    status = models.BooleanField(default=True)
+    
+        
+class UserCategory(models.Model):
+    user_category_name = models.CharField(max_length=255)
+    description = models.TextField()
+    status = models.BooleanField(default=True)
+
+
+class User(AbstractBaseUser, PermissionsMixin):
+    name = models.CharField(max_length=255, blank=True, default='')
+    date_of_birth = models.DateField()
+    gender = models.BooleanField(default=True)
+    email = models.EmailField(blank=True, default='', unique=True)
+    phone_number = models.CharField(max_length=15)
+    password = models.CharField(max_length=255)
+    profile_picture = models.ImageField(upload_to='img/', null=True, blank=True)
+    address = models.TextField()
+    status = models.BooleanField(default=True, null=True)
+    department_works_at = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
+    position = models.ForeignKey(Position, on_delete=models.SET_NULL, null=True, blank=True)
+    usercategory = models.ForeignKey(UserCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
+    last_login = models.DateTimeField(blank = True, null = True)
+    
+    objects = CustomUserManager()
+    
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+        
+    def get_full_name(self):
+        return self.name 
+    def get_short_name(self):
+         return self.name or self.email.split('@')[0]
+    def save(self, *args, **kwargs):
+        # Check for duplicate email
+        existing_user_email = User.objects.filter(email=self.email).exclude(id=self.id).first()
+        if existing_user_email:
+            raise ValidationError("Email đã tồn tại.")
+
+        # Check for duplicate phone_number
+        existing_user_phone = User.objects.filter(phone_number=self.phone_number).exclude(id=self.id).first()
+        if existing_user_phone:
+            raise ValidationError("Số điện thoại đã tồn tại.")
+
+        super().save(*args, **kwargs)
+    def __str__(self):
+        return self.name
+    def get_position_display(self):
+        return self.position.position_name
+    
+    
+    # Các trường mở rộng khác
+
+# class ThongBao(models.Model):
+#     tieu_de = models.CharField(max_length=255)
+#     noi_dung = models.TextField()
+#     ngay_bat_dau_hieu_luc = models.DateTimeField(null=True, blank=True)  # Thêm trường ngày bắt đầu hiệu lực
+#     ngay_het_hieu_luc = models.DateTimeField(null=True, blank=True)  # Thêm trường ngày hết hiệu lực
+#     nguoi_gui = models.ForeignKey('TaiKhoanNguoiDung', on_delete=models.SET_NULL, null=True, blank=True)
+#     nguoi_nhan = models.ManyToManyField('TaiKhoanNguoiDung', related_name='thong_bao_nhan')
+#     da_doc = models.ManyToManyField('TaiKhoanNguoiDung', through='LuotDoc', related_name='thong_bao_da_doc', blank=True)
+#     ngay_tao = models.DateTimeField(auto_now_add=True)
+#     ngay_cap_nhat = models.DateTimeField(auto_now=True)
+#     trang_thai = models.BooleanField(default=True)
+    
+# class LuotDoc(models.Model):
+#     user = models.ForeignKey('TaiKhoanNguoiDung', on_delete=models.CASCADE)
+#     thong_bao = models.ForeignKey('ThongBao', on_delete=models.CASCADE)
+#     lan_doc = models.PositiveIntegerField(default=1)
+#     thoi_gian_doc_dau_tien = models.DateTimeField(auto_now_add=True)
+    
+
+# class LichCongTac(models.Model):
+#     tuan_thu = models.IntegerField()
+#     nam = models.IntegerField()
+#     tu_ngay = models.DateField()
+#     den_ngay = models.DateField()
+#     ngay_cong_tac = models.DateField()
+#     sang_hay_chieu = models.BooleanField()
+#     thoi_gian = models.TimeField()
+#     dia_diem = models.CharField(max_length=255)
+#     lanh_dao_chu_tri = models.CharField(max_length=255)
+#     thanh_phan = models.TextField()
+#     chuan_bi = models.TextField()
+#     noi_dung = models.TextField()
+#     xuat_ban_lich = models.BooleanField()
+#     ghi_chu = models.TextField()
+
+# class LoaiVanBan(models.Model):
+#     ten_van_ban = models.CharField(max_length=255)
+#     mo_ta = models.TextField()
+#     trang_thai = models.BooleanField(default=True)
+
+# class VanBanMau(models.Model):
+#     loai_van_ban = models.ForeignKey(LoaiVanBan, on_delete=models.SET_NULL, null=True, blank=True)
+#     muc_do = models.CharField(max_length=255)
+#     trich_yeu = models.TextField()
+#     ngay_tao = models.DateField()
+#     ngay_sua = models.DateField()
+#     trang_thai = models.BooleanField(default=True)
+#     file_dinh_kem = models.FileField(upload_to='document_templates/', null=True, blank=True)
+#     ghi_chu = models.TextField()
+
+# class VanBanDen(models.Model):
+#     co_quan_ban_hanh = models.CharField(max_length=255)
+#     co_quan_chu_quan = models.CharField(max_length=255)
+#     so_ky_hieu = models.CharField(max_length=255)
+#     muc_do_van_ban = models.CharField(max_length=255)
+#     so_van_ban = models.CharField(max_length=255)
+#     loai_van_ban = models.ForeignKey(LoaiVanBan, on_delete=models.SET_NULL, null=True, blank=True)
+#     ngay_nhan_van_ban = models.DateField()
+#     ngay_ban_hanh_van_ban = models.DateField()
+#     so_hien_tai = models.CharField(max_length=255)
+#     so_den = models.CharField(max_length=255)
+#     van_ban_luu_tru = models.BooleanField()
+#     cho_phep_tat_ca_cac_co_quan_xem = models.BooleanField()
+#     trich_yeu = models.TextField()
+#     y_kien_tham_muu = models.TextField()
+#     file_dinh_kem = models.FileField(upload_to='incoming_documents/', null=True, blank=True)
+#     trang_thai = models.BooleanField(default=True)
+
+# class VanBanDi(models.Model):
+#     so_ky_hieu = models.CharField(max_length=255)
+#     muc_do_van_ban = models.CharField(max_length=255)
+#     so_van_ban = models.CharField(max_length=255)
+#     loai_van_ban = models.ForeignKey(LoaiVanBan, on_delete=models.SET_NULL, null=True, blank=True)
+#     ngay_gui_van_ban = models.DateField()
+#     ngay_ban_hanh_van_ban = models.DateField()
+#     so_hien_tai = models.CharField(max_length=255)
+#     so_di = models.CharField(max_length=255)
+#     van_ban_luu_tru = models.BooleanField()
+#     cho_phep_tat_ca_cac_co_quan_xem = models.BooleanField()
+#     trich_yeu = models.TextField()
+#     y_kien_tham_muu = models.TextField()
+#     file_dinh_kem = models.FileField(upload_to='outgoing_documents/', null=True, blank=True)
+#     trang_thai = models.BooleanField(default=True)
+
+# class CongViec(models.Model):
+#     ngay_bat_dau = models.DateField()
+#     ngay_ket_thuc = models.DateField()
+#     noi_dung_xu_ly = models.TextField()
+#     file_dinh_kem = models.FileField(upload_to='task_attachments/', null=True, blank=True)
+#     nguoi_su_ly = models.ForeignKey('TaiKhoanNguoiDung', on_delete=models.SET_NULL, null=True, blank=True)
+#     trang_thai = models.BooleanField(default=True)
+#     tien_do_xu_ly = models.IntegerField()

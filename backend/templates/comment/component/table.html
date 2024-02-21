@@ -1,0 +1,84 @@
+<div class="table-responsive">
+<table class="footable table table-striped table-bordered table-hover dataTables-example toggle-arrow-tiny">
+    <thead>
+        <tr>
+            <th >Tài khoản</th>
+            <th data-toggle="true">Nội dung</th>
+            <th class="text-center">Trạng thái</th>
+
+            <th data-hide="all">Người tạo</th>
+            <th data-hide="all">Ngày tạo</th>
+            <th data-hide="all">Ngày chỉnh sửa</th>
+            <th data-hide="all">Người chỉnh sửa</th>
+            <th data-hide="all">Số lượt thích</th>
+            <th data-hide="all">Trạng thái chỉnh sửa</th>
+            <th data-hide="all">Nội dung gốc</th>
+            <th data-hide="all">Bình luận cha</th>
+
+
+            <th class="text-center operation">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in comments %}
+            <tr class="gradeX">
+                <td class="text-center" width="100px"> 
+                    <img alt="image" class="img-circle img-sm" src="/upload/{{ comment.user.account.image }}">
+                </td>
+                <td> 
+                    {{ comment.content }}
+                </td>
+                <td class="text-center"> 
+                    <input type="checkbox" {% if comment.status %}checked{% endif %} class="js-switch status" name="status" data-model="comment" data-field="status" data-modelId="{{ comment.id }}">   
+                </td>
+
+                <td> {{ comment.user.get_full_name }}</td>
+                <td> {{ comment.created_date }}</td>
+                <td> {{ comment.updated_date }}</td>
+                <td> {{ comment.edited_by.get_full_name }}</td>
+                <td> {{ comment.likes.count }}</td>
+                <td> {{ comment.is_edited }}</td>
+                <td> {{ comment.original_content }}</td>
+                <td> {{ comment.parent_comment }}</td>
+                
+                
+                <td class="text-center">
+                    <a href="{% url 'delete_comment2' comment.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% comment %} {% url 'delete_comment' comment_url=comment.url %} {% endcomment %}
+
+<!-- Thêm script để xử lý sự kiện thay đổi status và gửi yêu cầu AJAX -->
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện khi checkbox status thay đổi
+        $('.status').change(function () {
+            var id = $(this).data('modelid');
+            var isChecked = $(this).prop('checked');
+
+            // Gửi yêu cầu AJAX để cập nhật trạng thái
+            $.ajax({
+                type: 'POST',
+                url: '/update_status_comment/',  // Đặt đường dẫn URL cập nhật trạng thái ở đây
+                data: {
+                    'comment_id': id,
+                    'status': isChecked ? '1' : '0',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // Thêm token CSRF để bảo vệ khỏi tấn công CSRF
+                },
+                success: function (data) {
+                    console.log('Cập nhật trạng thái thành công');
+                },
+                error: function () {
+                    console.log('Lỗi khi cập nhật trạng thái');
+                }
+            });
+        });
+    });
+</script>

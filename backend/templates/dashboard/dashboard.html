@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% load static %} {% block main-content%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Số lượng văn bản đến theo tháng</h5>
+                </div>
+                <div class="ibox-content">
+                    <canvas id="incoming-documents-chart" height="45"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Số lượng văn bản đi theo tháng</h5>
+                </div>
+                <div class="ibox-content">
+                    <canvas id="outgoing-documents-chart" height="45"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var ctxIncoming = document.getElementById('incoming-documents-chart').getContext('2d');
+    var ctxOutgoing = document.getElementById('outgoing-documents-chart').getContext('2d');
+
+    var monthsIncoming = [{% for item in documents_by_month_incom %}"Tháng {{ item.month }}",{% endfor %}];
+    var countsByMonthIncoming = [{% for item in documents_by_month_incom %}{{ item.count }},{% endfor %}];
+
+    var monthsOutgoing = [{% for item in documents_by_month_out %}"Tháng {{ item.month }}",{% endfor %}];
+    var countsByMonthOutgoing = [{% for item in documents_by_month_out %}{{ item.count }},{% endfor %}];
+
+    var chartDataIncoming = {
+        labels: monthsIncoming,
+        datasets: [{
+            label: 'Số lượng văn bản đến',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: countsByMonthIncoming
+        }]
+    };
+
+    var chartDataOutgoing = {
+        labels: monthsOutgoing,
+        datasets: [{
+            label: 'Số lượng văn bản đi',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            data: countsByMonthOutgoing
+        }]
+    };
+
+    var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    };
+
+    var chartIncoming = new Chart(ctxIncoming, {
+        type: 'line',
+        data: chartDataIncoming,
+        options: options
+    });
+
+    var chartOutgoing = new Chart(ctxOutgoing, {
+        type: 'line',
+        data: chartDataOutgoing,
+        options: options
+    });
+</script>
+
+{% endblock main-content%}

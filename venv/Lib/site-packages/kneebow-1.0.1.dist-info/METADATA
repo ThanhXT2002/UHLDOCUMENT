@@ -1,0 +1,116 @@
+Metadata-Version: 2.1
+Name: kneebow
+Version: 1.0.1
+Summary: Knee or elbow detection for curves
+Home-page: https://github.com/georg-un/kneebow
+Download-URL: https://github.com/georg-un/kneebow/archive/v1.0.1.tar.gz
+Author: Georg Unterholzner
+Author-email: georg.unterholzner.coding@gmail.com
+License: MIT
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.4
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: scikit-learn
+
+# kneebow
+
+Find the knee of a curve or the elbow of a curve.
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3baba89ac29b4a96bd990148deb36236)](https://www.codacy.com/app/georg-un/kneebow?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=georg-un/kneebow&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/georg-un/kneebow.svg?branch=master)](https://travis-ci.org/georg-un/kneebow)
+[![codecov](https://codecov.io/gh/georg-un/kneebow/branch/master/graph/badge.svg)](https://codecov.io/gh/georg-un/kneebow)
+
+## How it works
+
+kneebow builds upon a very simple idea: if we want to find the elbow of a curve, we can simply rotate the data so that curve looks down and then take the minimum value. If we want to find the knee of the curve, we take the maximum value instead. It's as simple as that.
+
+For more info, see [this answer](https://datascience.stackexchange.com/a/57135/67412) on the Data Science StackExchange.
+
+## Installation
+
+You can install the package via pip:
+
+```sh
+pip install kneebow
+```
+
+Alternatively, you can also install the latest version from GitHub:
+
+```sh
+pip install git+https://github.com/georg-un/kneebow.git
+```
+
+## Usage
+
+Let's assume, we try to find the elbow of the following data:
+
+```python
+import numpy as np
+data = np.array([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8],  # linear until (8,8)
+                 [9, 16], [10, 32], [11, 64], [12, 128], [13, 256], [14, 512]])   # exponential afterwards
+```
+Let's have a peak how this data looks like:
+
+![data_plot](https://raw.githubusercontent.com/georg-un/kneebow/master/assets/data_plot.png)
+
+To find the elbow, we create an instance of the `Rotor` class and use its `fit_rotate` method:
+
+```python
+from kneebow.rotor import Rotor
+ 
+rotor = Rotor()
+rotor.fit_rotate(data)
+```
+Now we can get the index of the elbow as follows:
+```python
+elbow_idx = rotor.get_elbow_index()
+print(elbow_idx)  # 11
+```
+The `Rotor` class also comes with plot methods to inspect the data visually together with the estimated elbow/knee:
+```python
+rotor.plot_elbow()
+```
+![rotor_plot](https://raw.githubusercontent.com/georg-un/kneebow/master/assets/rotor_plot.png)
+
+<!-- CITATION -->
+## Citation
+
+If you need to cite this package, you can do so as follows:
+
+### BibTeX
+
+```
+@misc{kneebow,
+  title={ {kneebow}: Knee or elbow detection for curves},
+  author={Unterholzner Georg},
+  year={2019},
+  howpublished={\url{https://github.com/georg-un/kneebow}},
+}
+```
+
+**Note:** Make sure to import the `url` package with: `\usepackage{url}`.
+
+### APA/Harvard
+
+```text
+Unterholzner Georg. (2019). kneebow: Knee or elbow detection for curves. https://github.com/georg-un/kneebow.
+```
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.

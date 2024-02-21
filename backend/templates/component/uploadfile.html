@@ -1,0 +1,22 @@
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <form action="{% url 'upload_file_view'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm File Upload</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Chọn File</label>
+                        <input type="file" name="file" multiple class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

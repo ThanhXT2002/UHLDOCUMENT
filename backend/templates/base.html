@@ -1,0 +1,22 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'component/head.html' %}
+        
+    </head>
+    <body>  
+        <div id="wrapper">
+            {% include 'component/sidebar.html' %} 
+          <div id="page-wrapper" class="gray-bg">
+            {% include 'component/nav.html' %}        
+            {% block main-content %} {% endblock main-content %}
+            {% include 'component/footer.html' %}
+        </div>
+        {% include 'component/rightside.html' %}
+        </div>
+
+        {% include 'component/script.html' %}
+      
+    </body>
+</html>

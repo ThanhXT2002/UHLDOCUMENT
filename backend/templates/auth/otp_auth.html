@@ -1,0 +1,42 @@
+{% load static %}
+<title>{%block title%}Xác nhận OTP- UHL{%endblock%}</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'component/head.html' %}
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown ">
+        <div class="m-t-lg">
+            <div >
+                <img width=300px, src="{%static 'assets/img/logo/logo-UHL.png'%}" alt="">
+            </div>
+            <h2 class="m-t-lg m-b-lg font-bold ">Quên Mật Khẩu</h2>
+           
+            {% if messages %}
+                
+                {% for message in messages %}
+                <p class="text-danger"><i>
+                    {{ message }}
+                </i></p>
+                {% endfor %}
+                
+            {% endif %}
+            <p>
+                Nhập mã otp của bạn.
+            </p>
+            <form class="m-t" role="form" method="post" action="{% url 'otp_auth' %}">
+                {% csrf_token %}
+                <div class="form-group  m-b-md">
+                    <input type="text" class="form-control" name="otp" value="{{request.POST.otp}}"  placeholder="Mã OTP của bạn" required="">
+                </div>
+                <button type="submit" class="btn btn-primary full-width m-b"  data-style="zoom-in">Xác nhận OTP</button>
+            </form>
+            <p class="m-t"> <small>Bản quyền thuộc Đại học Hạ Long &copy; 2024</small> </p>
+        </div>
+    </div>
+  
+    {% include 'component/script.html' %}
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<table class="table table-bordered dataTables-example">
+    <thead>
+        <tr>
+            <th>Tên chức vụ</th>
+            <th>Mô tả</th>
+            <th class="text-center">Tình Trạng</th>
+            <th class="text-center operation">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for position in positions %}
+            <tr>
+                <td>
+                    {{ position.position_name }}
+                </td>
+                <td>
+                    {{ position.description }}
+                </td>
+                <td class="text-center">
+                    
+                    <input type="checkbox" {% if position.status %}checked{% endif %} class="js-switch status" data-model="position" data-field="status" data-modelId="{{ position.id }}">
+                    
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'edit_position' position.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href="{% url 'delete_position' position.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Thêm script để xử lý sự kiện thay đổi status và gửi yêu cầu AJAX -->
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện khi checkbox status thay đổi
+        $('.status').change(function () {
+            var positionId = $(this).data('modelid');
+            var isChecked = $(this).prop('checked');
+
+            // Gửi yêu cầu AJAX để cập nhật trạng thái
+            $.ajax({
+                type: 'POST',
+                url: '/update_status/',  // Đặt đường dẫn URL cập nhật trạng thái ở đây
+                data: {
+                    'position_id': positionId,
+                    'status': isChecked ? '1' : '0',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // Thêm token CSRF để bảo vệ khỏi tấn công CSRF
+                },
+                success: function (data) {
+                    console.log('Cập nhật trạng thái thành công');
+                },
+                error: function () {
+                    console.log('Lỗi khi cập nhật trạng thái');
+                }
+            });
+        });
+    });
+</script>

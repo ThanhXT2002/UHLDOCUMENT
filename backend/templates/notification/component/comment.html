@@ -1,0 +1,64 @@
+{% for comment in comments.replies.all %}
+<div class="social-avatar">
+    <a href="" class="pull-left">
+        <img alt="image" class="img-sm img-circle" src="/upload/{{comment.user.account.image}}">
+    </a>
+    <div class="media-body">
+      {% load tz %}
+      {% with time_difference=comment.created_date|timesince:now %}
+          <small class="pull-right">{{ time_difference|default:"just now" }}</small>
+      {% endwith %}
+      <strong>{{comment.user.get_full_name}}</strong>
+      <br>
+        <small class="text-muted">{{comment.created_date}}</small>
+    </div>
+</div>
+<div class="social-body">
+    <div class="well" >
+      {{ comment.content }}   
+    </div>
+    <div class="uk-flex uk-flex-middle uk-flex-space-between">
+      <div>
+          <a href="javascript:void(0);" id="like-btn-{{ comment.id }}" class="btn-xs btn-white p-xxs" onclick="toggleLike({{ comment.id }})">
+              {% if comment in liked_comments %}
+                  <i class="fa fa-thumbs-up bg-success p-xxs b-r-xl">Unlike</i> <span class="like-text"> Lượt thích {{ comment.get_like_count }}</span>
+              {% else %}
+                  <i class="fa fa-thumbs-o-up"></i> Like <span class="like-text"> Lượt thích {{ comment.get_like_count }}</span>
+              {% endif %}
+          </a>
+          <button class="btn-xs btn-white p-xxs m-l-xs" onclick="toggleReplyForm('reply-form-{{ comment.id }}')">
+              <i class="fa fa-mail-reply"></i> Reply
+          </button>
+      </div>
+      <div>
+        {% if user.is_authenticated and comment.user == user %}
+            <a href="{% url 'delete_comment' comment.id %}" class="text-primary m-r-md" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
+                <i class="fa fa-trash m-r-xs"></i>Xóa
+            </a>
+            <span class="btn text-primary" onclick="toggleEditForm('edit-form-{{ comment.id }}')" ><i class="fa fa-edit m-r-xs"></i>Chỉnh sửa</span>
+        {% endif %}
+    </div>
+    </div>
+     {% comment %} ==========form chỉnh sửa=========== {% endcomment %}
+     <form method="post" action="{% url 'edit_comment' comment.id %}" class="edit-form" id="edit-form-{{ comment.id }}" style="display:none;">
+        {% csrf_token %}
+        <div class="form-group m-t-sm">
+            <textarea class="form-control" name="content" placeholder="Message">{{ comment.content }}</textarea>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Lưu chỉnh sửa</strong></button>
+        </div>
+    </form>
+      {% comment %} ==========endform chỉnh sửa=========== {% endcomment %}
+    <form method="post" action="{% url 'add_reply' comment.id %}" class="reply-form" id="reply-form-{{ comment.id }}" style="display:none;">
+      {% csrf_token %}
+      <div class="form-group m-t-sm">
+          <textarea class="form-control" name="content" placeholder="Message"></textarea>
+      </div>
+      <div class="text-right">
+          <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Gửi phản hồi</strong></button>
+      </div>
+  </form>
+    
+</div>
+{%endfor%}

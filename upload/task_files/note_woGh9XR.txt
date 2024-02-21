@@ -1,0 +1,97 @@
+django-admin startproject projectname
+python manage.py runserver 8888
+python manage.py startapp
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py check: kiểm tra cú pháp lỗi trong mã nguồn
+
+
+
+
+- tạo modul 
+- tạo thư mực chứa html
+
+- vào setting.py đưa tên trang trong template vào
+- vào views.py để trả về trang html
+- vào urls.py để truyền đường dẫn:
++ vào urlpatterns thêm path('', home.get_home),
+
+
+user_catalogues:
+    id
+    name
+    description
+    status
+
+users:
+    id
+    name
+    email
+    password
+    phone
+    birthday
+    image
+    description
+    gender
+    status,
+    updated_at,
+    user_catalogue_id
+
+post_catalogues:
+    id,
+    parent_id,
+    lft,
+    rgt,
+    level,
+    name,
+    description,
+    content,
+    image,
+    album,
+    status,
+    order,
+    user_id,
+    deleted_at(time),
+    created_at1(time),
+    updated_at(time),
+    url,
+    meta_title,
+    meta_keyword,
+    meta_description,
+
+posts:
+    id,
+    name,
+    description,
+    content,
+    image,
+    album,
+    status,
+    order,
+    user_id,
+    deleted_at(time),
+    created_at1(time),
+    updated_at(time),
+    post_catalogue_id,
+
+comments:
+    id,
+    user_id,
+    post_id,
+    parent_comment_id,
+    content,
+    created_at,
+    updated_at,
+    status
+
+contacts:
+    id,
+    name,
+    email,
+    phone,
+    content,
+    created_at,
+    status
+
+

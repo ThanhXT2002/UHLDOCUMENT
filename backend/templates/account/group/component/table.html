@@ -1,0 +1,25 @@
+<table class="table table-bordered dataTables-example">
+    <thead>
+        <tr>
+            <th>Tên loại thành viên</th>
+            <th>Số thành viên</th>
+            <th class="text-center operation">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for group in groups %}
+            <tr>
+                <td>
+                    {{ group.name }}
+                </td>
+                <td>
+                    {{ group.member_count }}
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'edit_group' group.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href="{% url 'delete_group' group.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

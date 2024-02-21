@@ -1,0 +1,36 @@
+{%load static%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{%block title%} {{"Đại Học Hạ Long - UHL"}} {%endblock%}</title>
+<link href="{%static 'assets/css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{%static 'assets/font-awesome/css/font-awesome.css'%}" rel="stylesheet">
+<link href="{%static 'assets/css/plugins/morris/morris-0.4.3.min.css'%}" rel="stylesheet">
+<link href="{%static 'assets/css/animate.css'%}" rel="stylesheet">
+
+{% comment %} <link href="{%static 'assets/css/plugins/summernote/summernote.css'%}" rel="stylesheet">
+<link href="{%static 'assets/css/plugins/summernote/summernote-bs3.css'%}" rel="stylesheet"> {% endcomment %}
+
+<!-- Toastr style -->
+<link href="{%static 'assets/css/plugins/toastr/toastr.min.css'%}" rel="stylesheet">
+<link href="{%static 'assets/css/plugins/select2/select2.min.css'%}" rel="stylesheet">
+<link href="{%static 'assets/css/plugins/footable/footable.core.css'%}" rel="stylesheet">
+
+<link href="{%static 'assets/css/plugins/clockpicker/clockpicker.css'%}" rel="stylesheet">
+
+<link href="{%static 'assets/css/style.css'%}" rel="stylesheet">
+<link href="{%static 'assets/css/customize.css'%}" rel="stylesheet">
+
+{% comment %} datatable {% endcomment %}
+<link href="{%static 'assets/css/plugins/dataTables/datatables.min.css'%}" rel="stylesheet">
+<script src="{%static 'assets/js/jquery-3.1.1.min.js'%}"></script>
+{% for css_file in custom_css %}
+<link rel="stylesheet" href="{% static 'assets/css/' %}{{ css_file }}">
+{% endfor %}
+
+
+<script src="{{ js_cnd_file }}"></script>
+
+
+
+
+

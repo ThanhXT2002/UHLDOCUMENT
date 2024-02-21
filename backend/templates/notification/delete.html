@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content%}
+{% include 'component/breadcrumb.html' with title=title %}
+
+<form action="{% url 'delete_notification' notification_url=notification.url %}" method="post">
+  {% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="text-right mb15">
+        <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Xóa ngay</button>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel-title">Thông tin chung</div>
+            <div class="panel-desription">
+                <p>Bạn có chắc chắn muốn xóa thông báo "<strong class="text-danger">{{ notification.title}}</strong>" không?</p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row mb15">
+                        <div class="col-lg-12 mb15">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Tên thông báo
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                                <input type="text" class="form-control" name="title" value="{{ notification.title }}" placeholder="Mời nhập thông tin" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb15">
+                        <div class="col-lg-12">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Nội dung
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                               
+                                <textarea class="summernote inbox-textarea form-control mb15" name="content" style="display: none;">{{ notification.content }}</textarea>
+                               
+                            </div>
+                        </div> 
+                       
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</form>
+
+{% endblock main-content%}

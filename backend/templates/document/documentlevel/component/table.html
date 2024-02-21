@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover dataTables-example">
+    <thead>
+      <tr>
+        <th>Tên mức độ văn bản</th>
+        <th>Mô tả</th>
+        <th class="text-center operation">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for docu_level in docu_levels %}
+      <tr class="gradeX">
+        <td>{{ docu_level.name }}</td>
+        <td>{{ docu_level.description }}</td>
+        <td class="text-center">
+          <a href="{% url 'edit_docu_level' docu_level.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+          <a href="{% url 'delete_docu_level' docu_level.id %} " class="btn btn-danger"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Tên mức độ văn bản</th>
+        <th>Mô tả</th>
+        <th class="text-center">Thao tác</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+

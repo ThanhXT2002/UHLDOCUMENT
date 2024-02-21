@@ -1,0 +1,72 @@
+<form method="GET" action="">
+    <div class="filter-wrapper">
+        <div class="uk-flex uk-flex-middle uk-flex-space-between">
+            <div class="perpage">
+                <div class="uk-flex uk-flex-middle uk-flex-space-between">
+                    <select name="status" class="form-control setupSelect2 mr10 select2-hidden-accessible" data-select2-id="select2-data-4-md33" tabindex="-1" aria-hidden="true">  
+                        <option selected="" value="0" data-select2-id="select2-data-6-3u11">Chọn tình trạng</option>
+                        <option value="1">Không xuất bản</option>
+                        <option value="2">Xuất bản</option>
+                    </select>
+                </div>
+            </div>
+            <div class="action">
+                <div class="uk-flex uk-flex-middle">
+                    <a href="{% url 'add_tem_docu' %}" class="btn btn-danger"><i class="fa fa-plus mr5"></i>Thêm loại văn bản</a>       
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+{% comment %} <form action="" method="GET">
+    <div class="filter-wrapper">
+        <div class="uk-flex uk-flex-middle uk-flex-space-between">
+            <div class="perpage">
+                @php
+                    $perpage = request('perpage') ?: old('perpage'); 
+                @endphp
+                <div class="uk-flex uk-flex-middle uk-flex-space-between">
+                    <select name="perpage" id="" class="form-control input-sm perpage filter  setupSelect2">
+                        @for($i = 20; $i <= 200;$i+=20)
+                            <option {{($perpage == $i) ? 'selected' : ''}} value="{{$i}}">{{$i}} bản ghi</option>
+                        @endfor
+                    </select>  
+                </div>
+            </div>
+            <div class="action">
+                <div class="uk-flex uk-flex-middle">
+                    @php
+                        $publishArray = ['Không xuất bản', 'Xuất bản'];
+                        $publish = request('status') ?: old('status');
+                    @endphp
+                    <select name="status" class="form-control  setupSelect2 mr10">  
+                        @foreach(config('apps.general.publish') as $key => $val)
+                        <option {{($publish == $key) ? 'selected' : ''}} value="{{$key}}" >{{$val}}</option>
+                        @endforeach
+                    </select>
+                    
+                    <div class="uk-search uk-flex uk-flex-middle">
+                        <div class="input-group">
+                            <input 
+                                type="text"
+                                name = "keyword"
+                                value="{{ request('keyword') ?: old('keyword') }}"
+                                placeholder="Nhập từ khóa........"
+                                class="form-control" >
+                            <span class="input-group-btn">
+                                 <button type="submit" name="search" value="search" class="btn btn-success mb0 btn-xl mr10">
+                                        Tìm kiếm
+                                </button>
+                            </span>
+                        </div>
+                    </div> 
+                    <a href="{{route('user.catalogue.create')}}" class="btn btn-danger"><i class="fa fa-plus mr5"></i>Thêm mới nhóm thành viên</a>       
+                </div>
+            </div>
+        </div>
+    </div>
+</form> {% endcomment %}

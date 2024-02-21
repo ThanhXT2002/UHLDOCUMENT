@@ -1,0 +1,65 @@
+<table class="table table-bordered dataTables-example">
+    <thead>
+        <tr>
+            <th>Tên phòng ban</th>
+            <th>Trưởng phòng</th>
+            <th>Địa chỉ</th>
+            <th class="text-center">Tình Trạng</th>
+            <th class="text-center operation">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department in departments %}
+            <tr>
+                <td>
+                    {{ department.department_name }}
+                </td>
+                <td>
+                    {{ department.head_of_department }}
+                </td>
+                <td>
+                    {{ department.address }}
+                </td>
+                <td class="text-center">
+                    
+                    <input type="checkbox" {% if department.status %}checked{% endif %} class="js-switch status" data-model="department" data-field="status" data-modelId="{{ department.id }}">
+                    
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'edit_department' department.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href="{% url 'delete_department' department.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Thêm script để xử lý sự kiện thay đổi status và gửi yêu cầu AJAX -->
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện khi checkbox status thay đổi
+        $('.status').change(function () {
+            var id = $(this).data('modelid');
+            var isChecked = $(this).prop('checked');
+
+            // Gửi yêu cầu AJAX để cập nhật trạng thái
+            $.ajax({
+                type: 'POST',
+                url: '/update_status_department/',  // Đặt đường dẫn URL cập nhật trạng thái ở đây
+                data: {
+                    'department_id': id,
+                    'status': isChecked ? '1' : '0',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // Thêm token CSRF để bảo vệ khỏi tấn công CSRF
+                },
+                success: function (data) {
+                    console.log('Cập nhật trạng thái thành công');
+                },
+                error: function () {
+                    console.log('Lỗi khi cập nhật trạng thái');
+                }
+            });
+        });
+    });
+</script>

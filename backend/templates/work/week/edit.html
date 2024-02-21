@@ -1,0 +1,80 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content%} 
+{% include 'component/breadcrumb.html' with title=title %}
+
+<form action="{% if week.id %}{% url 'edit_week' week.id %}{% endif %}"method="post">
+  {% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="text-right mb15">
+        <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Lưu lại</button>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel-title">Thông tin chung</div>
+            <div class="panel-desription"><p>Nhập thông tin của tuần</p>
+                <p>Lưu ý: Những trường đánh dấu <span class="text-danger">(*)</span> là bắt buộc</p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row mb15">
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Tuần
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                                {{form.week_number}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">
+                                    Năm
+                                </label>
+                                {{form.year}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb15">
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Ngày bắt đầu
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                               {{form.start_date}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">
+                                    Ngày kết thúc
+                                </label>
+                                {{form.end_date}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb15">
+                        <div class="col-lg-12">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Ghi chú
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                                {{form.description}}
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="text-right mb15">
+        <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Lưu lại</button>
+    </div>
+</div>
+</form>
+{% endblock main-content%}

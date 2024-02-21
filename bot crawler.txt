@@ -1,0 +1,75 @@
+1. Bot crawler là gì?
+    Bot crawler là một phần mềm được thiết kế để duyệt các trang web một cách có hệ thống, giúp thu thập thông tin 
+    của những trang web đó về cho công cụ tìm kiếm. Việc này sẽ mang lại khả năng lưu chỉ mục các trang web đó vào 
+    bộ cơ sở dữ liệu của Search Engine.
+
+2. Bot crawler bao gồm các thành phần nào?
+    Bot crawler, hoặc web crawler, bao gồm nhiều thành phần để thực hiện các chức năng duyệt web và thu thập thông 
+    tin. Dưới đây là một mô tả tổng quan về các thành phần chính của một bot crawler:
+
+    - Scheduler (Lập Lịch):
+        Quản lý thời gian và tần suất các yêu cầu truy cập đến các trang web.
+        Xác định thứ tự của các URL cần được duyệt.
+
+    - Downloader (Tải Xuống):
+        Tải nội dung của các trang web dựa trên danh sách được lên lịch.
+        Xử lý các yêu cầu HTTP và lấy dữ liệu từ máy chủ.
+
+    - URL Frontier (Hàng Đợi URL):
+        Lưu trữ và quản lý danh sách các URL cần được duyệt.
+        Điều phối việc lấy các URL mới từ trang web đã được duyệt.
+
+    - Link Extractor (Trích Xuất Liên Kết):
+        Phân tích nội dung của trang web để tìm kiếm và trích xuất các liên kết mới.
+        Xác định các URL để thêm vào hàng đợi để duyệt.
+
+    - URL Filter (Bộ Lọc URL):
+        Lọc và kiểm tra các URL để đảm bảo tính hợp lệ và tránh lặp lại.
+        Áp dụng các quy tắc và ràng buộc để kiểm soát phạm vi duyệt.
+
+    - Document Parser (Phân Tích Văn Bản):
+        Phân tích nội dung của trang web đã tải xuống để trích xuất thông tin cần thiết.
+        Chuyển đổi dữ liệu từ định dạng không cấu trúc thành dữ liệu có thể sử dụng.
+
+    - Data Storage (Lưu Trữ Dữ Liệu):
+        Lưu trữ dữ liệu thu thập được từ trang web.
+        Thường sử dụng cơ sở dữ liệu hoặc hệ thống lưu trữ để tổ chức thông tin.
+
+    - Politeness Policy (Chính Sách Lịch Sự):
+        Điều chỉnh tốc độ và tần suất của các yêu cầu để tránh gây áp lực quá mức lên máy chủ trang web.
+        Tuân thủ các quy tắc và ràng buộc đặt ra bởi robots.txt hoặc các chính sách khác.
+
+    - Distributed Components (Các Thành Phần Phân Tán):
+        Trong các hệ thống lớn, bot crawler có thể được thiết kế để hoạt động trên nhiều máy chủ hoặc nút để tăng khả 
+        năng mở rộng.
+    => Mỗi thành phần đóng vai trò quan trọng trong quá trình hoạt động của bot crawler và đảm bảo hiệu suất, tính linh 
+    hoạt, và tuân thủ đối với quy tắc web.
+
+3. Ứng dụng của bot crawler
+    - Thu thập thông tin cho công cụ tìm kiếm: Đây là ứng dụng phổ biến nhất của giải pháp bot crawler.
+    - Tự động hóa các tác vụ trên web: Giải pháp bot crawler có thể được sử dụng để tự động hóa các tác vụ trên 
+    web, chẳng hạn như đăng tải nội dung, kiểm tra lỗi, v.v.
+    - Phân tích dữ liệu web: Giải pháp bot crawler có thể được sử dụng để phân tích dữ liệu web, chẳng hạn như xu 
+    hướng tìm kiếm, hành vi người dùng.
+
+4. Ưu điểm của bot crawler
+    - Tự động hóa các tác vụ trên web: Giải pháp bot crawler có thể tự động hóa các tác vụ trên web, giúp tiết 
+    kiệm thời gian và công sức cho người dùng.
+    - Thu thập thông tin nhanh chóng và chính xác: Giải pháp bot crawler có thể thu thập thông tin từ các trang 
+    web một cách nhanh chóng và chính xác.
+    - Phân tích dữ liệu web: Giải pháp bot crawler có thể phân tích dữ liệu web, giúp người dùng hiểu rõ hơn về 
+    các xu hướng và hành vi của người dùng.
+
+5. Hạn chế của giải pháp bot crawler
+    - Có thể gây ra tắc nghẽn mạng: Nếu không được sử dụng đúng cách, giải pháp bot crawler có thể gây ra tắc nghẽn 
+    mạng, khiến các trang web bị chậm hoặc không thể truy cập được.
+    - Có thể bị sử dụng cho mục đích xấu: Giải pháp bot crawler có thể bị sử dụng cho mục đích xấu, chẳng hạn như 
+    đánh cắp dữ liệu, phát tán virus, v.v.
+
+6. Lưu ý khi sử dụng giải pháp bot crawler
+    - Cần sử dụng giải pháp bot crawler từ các nhà cung cấp uy tín: Các giải pháp bot crawler từ các nhà cung cấp 
+    uy tín thường được thiết kế với các tính năng bảo mật và chống tắc nghẽn mạng.
+    - Cần thiết lập các quy tắc sử dụng cho giải pháp bot crawler: Các quy tắc sử dụng sẽ giúp hạn chế việc giải 
+    pháp bot crawler bị sử dụng cho mục đích xấu.
+    - Cần thường xuyên theo dõi và giám sát hoạt động của giải pháp bot crawler: Việc theo dõi và giám sát sẽ giúp 
+    phát hiện kịp thời các vấn đề phát sinh trong quá trình sử dụng giải pháp bot crawler.

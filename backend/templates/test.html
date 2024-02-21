@@ -1,0 +1,246 @@
+<form method="post" enctype="multipart/form-data" action="{% url 'profile' encoded_id %}">
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+            {% csrf_token %}
+        <div class="modal-dialog modal-lg" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Cập nhật thông tin</h4>                                         
+                    </div>
+                    <div class="modal-body text-start p-5 px-lg-20 py-10">
+                        <div class="p-lg m-b-lg border-top-bottom border-left-right border-size-sm custom-border ">	
+                            <h3 class="m-t-n-xl "><span class="bg-madal">Thông tin chung</span></h3>
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Họ
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{form.first_name}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Tên
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.last_name }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                        
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Ngày sinh
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.date_of_birth }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Giới tính 
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.gender }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Dân tộc
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.ethnicity }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Quốc tịch
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.nationality }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Trình độ văn hóa
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.educational_background }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Trình độ chuyên môn
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.professional_degree }}
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                        </div>
+                        <div class="p-lg m-b-lg border-top-bottom border-left-right border-size-sm custom-border ">
+                            <h3 class="m-t-n-xl"><span class="bg-madal">Thông tin liên hệ</span></h3>
+                                
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Địa chỉ
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.address }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Số điện thoại
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.phone_number }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Email
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right"> link Facebook
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.link_facebook }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Link Zalo
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.link_zalo }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Link Instagram
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.link_instagram }}
+                                        </div>
+                                    </div>
+                                </div> 
+
+                        </div>
+                        <div class="p-lg m-b-lg border-top-bottom border-left-right border-size-sm custom-border ">
+                            <h3 class="m-t-n-xl"><span class="bg-madal">Thông tin cơ quan trường học</span></h3>
+                                    <div class="row mb15">
+                                        <div class="col-lg-6">
+                                            <div class="form-row">
+                                                <label for="" class="control-lable text-right">Chức vụ
+                                                    <span class="text-danger">(*)</span>
+                                                </label>
+                                                {{ form.position }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-row">
+                                                <label for="" class="control-lable text-right">Phòng ban
+                                                    <span class="text-danger">(*)</span>
+                                                </label>
+                                                {{ form.department_works_at }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb15">
+                                        <div class="col-lg-6">
+                                            <div class="form-row">
+                                                <label for="" class="control-lable text-right">Cơ quan làm việc
+                                                    <span class="text-danger">(*)</span>
+                                                </label>
+                                                {{ form.current_company }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-row">
+                                                <label for="" class="control-lable text-right">Số điện thoại cơ quan
+                                                    <span class="text-danger">(*)</span>
+                                                </label>
+                                                {{ form.office_phone_number }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb15">
+                                        <div class="col-lg-12">
+                                            <div class="form-row">
+                                                <label for="" class="control-lable text-right">Địa chỉ cơ quan
+                                                    <span class="text-danger">(*)</span>
+                                                </label>
+                                                {{ form.office_address }}
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="p-lg border-top-bottom border-left-right border-size-sm custom-border ">
+                            <h3 class="m-t-n-xl"><span class="bg-madal">Xác thực thông tin</span></h3>
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right"> Số căn cước công dân
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.citizen_id }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Ngày cấp
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.citizen_id_issue_date }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb15">
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">nới cấp
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.citizen_id_issuing_place }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <label for="" class="control-lable text-right">Hình ảnh 2 mặt
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            {{ form.citizen_id_images }}
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                    <button type="submi" class="btn btn-primary btn-sm rounded-0">Lưu lại</button>
+                    </div>
+                </div>
+        </div>
+    
+    </div>
+    </div>
+</form>  

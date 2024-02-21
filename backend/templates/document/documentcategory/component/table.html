@@ -1,0 +1,58 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">STT</th>
+            <th>Tên loại văn bản</th>
+            <th>Mô tả</th>
+            <th class="text-center">Trạng thái</th>
+            <th class="text-center operation">Thao tác</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {% for docu_cate in docu_cates %}
+            <tr>
+                <td class="text-center">
+                    {{ forloop.counter }}
+                </td>
+                <td>{{ docu_cate.document_name }}</td>
+                <td> {{ docu_cate.description }}</td>
+                <td class="text-center"> 
+                    <input type="checkbox" {% if docu_cate.status %}checked{% endif %} class="js-switch status" data-model="docu_cate" data-field="status" data-modelId="{{ docu_cate.id }}">   
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'edit_docu_cate' docu_cate.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href="{% url 'delete_docu_cate' docu_cate.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Thêm script để xử lý sự kiện thay đổi status và gửi yêu cầu AJAX -->
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện khi checkbox status thay đổi
+        $('.status').change(function () {
+            var id = $(this).data('modelid');
+            var isChecked = $(this).prop('checked');
+
+            // Gửi yêu cầu AJAX để cập nhật trạng thái
+            $.ajax({
+                type: 'POST',
+                url: '/update_status_docu_cate/',  // Đặt đường dẫn URL cập nhật trạng thái ở đây
+                data: {
+                    'docu_cate_id': id,
+                    'status': isChecked ? '1' : '0',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // Thêm token CSRF để bảo vệ khỏi tấn công CSRF
+                },
+                success: function (data) {
+                    console.log('Cập nhật trạng thái thành công');
+                },
+                error: function () {
+                    console.log('Lỗi khi cập nhật trạng thái');
+                }
+            });
+        });
+    });
+</script>

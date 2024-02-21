@@ -1,0 +1,22 @@
+{% load static %}
+<title>{%block title%}Error_page_403{%endblock%}</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'component/head.html' %}
+</head>
+<body class="gray-bg p-b-xl">
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>403</h1>
+        <h3 class="font-bold">Lỗi phân quyền</h3>
+
+        <div class="error-desc">
+            Gặp phải sự cố không mong muốn khiến nó không thể hoàn thành yêu cầu. Chúng tôi xin lỗi.
+            Bạn có thể quay lại trang chính sau khi chúng tôi xem xét và khắc phục <br/><a href="/" class="btn btn-primary m-t">Trở về trang chủ</a>
+        </div>
+    </div>
+    {% include 'component/script.html' %}
+</body>
+</html>
+
+

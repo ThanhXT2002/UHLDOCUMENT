@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover dataTables-example">
+      <thead>
+        <tr>
+            <th>Người dùng</th>
+            <th>Thông báo</th>
+            <th class="text-center">Lượt đọc</th>
+            <th>Lần đầu đọc</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for readrecord  in readrecords %}
+            <tr>
+                <td> {{ readrecord.user}}</td>
+                <td> {{ readrecord.notification }}</td>
+                <td class="text-center"> {{ readrecord.read_count }}</td>
+                <td > {{ readrecord.first_read_time }} </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+      <tfoot>
+        <tr>
+            <th>Người dùng</th>
+            <th>Thông báo</th>
+            <th class="text-center">Lượt đọc</th>
+            <th>Lần đầu đọc</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>

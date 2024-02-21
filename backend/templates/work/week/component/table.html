@@ -1,0 +1,43 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover dataTables-example">
+      <thead>
+        <tr>
+          <th class="text-center">Tuần</th>
+          <th class="text-center">Năm</th>
+          <th class="text-center">Ngày bắt đầu</th>
+          <th class="text-center">Ngày kết thúc</th>
+          <th class="text-center">Số lịch công tác</th>
+          <th>Ghi chú</th>
+          <th class="text-center operation">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for week in weeks %}
+        <tr class="gradeX">
+          <td class="text-center">{{ week.week_number }}</td>
+          <td class="text-center">{{ week.year}}</td>
+          <td class="text-center">{{ week.start_date }}</td>
+          <td class="text-center">{{ week.end_date }}</td>
+          <td class="text-center">{{ week.get_schedule_count }}</td>
+          <td class=>{{ week.description }}</td>
+          
+          <td class="text-center">
+            <a href="{% url 'edit_week' week.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+            <a href="{% url 'delete_week' week.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th class="text-center">Tuần</th>
+          <th class="text-center">Năm</th>
+          <th class="text-center">Ngày bắt đầu</th>
+          <th class="text-center">Ngày kết thúc</th>
+          <th class="text-center">Số lịch công tác</th>
+          <th>Ghi chú</th>
+          <th class="text-center operation">Thao tác</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>

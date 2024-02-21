@@ -1,0 +1,99 @@
+{% load custom_filters %}
+<div class="table-responsive">
+    <table class=" footable  table table-striped table-bordered table-hover toggle-arrow-tiny">
+      <thead>
+        <tr>
+          <th data-toggle="true" >Ngày</th>
+          <th width="70px" class="text-center">Buổi</th>
+          <th>Thời gian</th>
+          <th>Loại lịch công tác</th>
+          <th width="30%" >Nội dung</th>
+          <th >Trạng thái</th>
+
+          <th data-hide="all">Địa điểm</th>
+          <th data-hide="all">Người lãnh đạo</th>
+          <th data-hide="all">Thành phần tham gia</th>
+          <th data-hide="all">Chuẩn bị</th>
+          <th data-hide="all">Ghi chú</th>
+          <th data-hide="all">Người dùng</th>
+          <th data-hide="all">Phòng ban</th>
+          <th data-hide="all">Tạo ngày</th>
+          <th data-hide="all">Cập nhật ngày</th>
+          <th data-hide="all">Người tạo</th>
+
+          <th class="text-center operation">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if latest_week_schedule %}
+        {% for schedule in latest_week_schedule %}
+                <tr>
+                    {% for day in days_of_week %}
+                        {% if schedule.work_date == day %}
+                            <td>{{ day|custom_date_format }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td class="text-center">
+                    {% if schedule.morning_or_afternoon %}
+                        Sáng
+                    {% else %}
+                        Chiều
+                    {% endif %}
+                    </td>
+                    <td>{{ schedule.start_time }} --- {{ schedule.end_time }}</td>
+                    <td>
+                        {{ schedule.get_schedule_category_display }}
+                    </td>
+                    <td>{{ schedule.content }}</td>
+
+                    <td class="text-center"> 
+                        {% if schedule.status %}
+                        Hoàn Thành
+                        {% else %}
+                            Chưa hoàn thành
+                        {% endif %}    
+                    </td>
+                    <td>{{schedule.location}}</td>
+                    <td>{{schedule.leading_official}}</td>
+                    <td>{{schedule.participants}}</td>
+                    <td>{{schedule.preparation}}</td>
+                    <td>{{schedule.description}}</td>
+                    <td>{% for user in schedule.user.all %}
+                        {{ user.username }}
+                        <br>
+                    {% endfor %}</td>
+                    
+                    <td>{% for department in schedule.department.all %}
+                        {{ department.department_name }}
+                        {# Hiển thị thông tin người dùng, ví dụ là tên người dùng #}
+                        <br>
+                    {% endfor %}</td>
+                    <td>{{schedule.created_at}}</td>
+                    <td>{{schedule.updated_at}}</td>
+                    <td>{{schedule.creator}}</td>
+                    
+                    <td class="text-center">
+                        <a href="{% url 'edit_schedule' schedule.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                        <a href="{% url 'delete_schedule' schedule.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% else %}
+    <p>Không có lịch công tác nào được tìm thấy cho tuần này.</p>
+  {% endif %}
+           
+    </tbody> 
+      <tfoot>
+        <tr>
+            <th data-toggle="true" >Ngày</th>
+            <th width="70px" class="text-center">Buổi</th>
+            <th>Thời gian</th>
+            <th>Loại lịch công tác</th>
+            <th width="30%" >Nội dung</th>
+            <th >Trạng thái</th>
+            <th class="text-center">Thao tác</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div> 
+

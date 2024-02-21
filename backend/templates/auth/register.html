@@ -1,0 +1,66 @@
+{% load static %}
+<title>{%block title%}Đăng Ký- UHL{%endblock%}</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'component/head.html' %}
+</head>
+<body class="gray-bg ">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="m-t-n-sm">
+            <div >
+                <img width=300px, src="{%static 'assets/img/logo/logo-UHL.png'%}" alt="">
+            </div>
+            <h3 class="m-t-sm m-b-sm">Chào mừng đến với hệ thống quản lý của trường đại học hạ long</h3>
+            {% if messages %}
+                
+                    {% for message in messages %}
+                    <p class="text-danger"><i>
+                        {{ message }}
+                    </i></p>
+                    {% endfor %}
+                
+            {% endif %}
+            
+            {% if warning_message %}
+                <div class="alert alert-warning">
+                    {{ warning_message }}
+                </div>
+            {% endif %}
+            <form class="m-t" role="form" method="post" action="{% url 'register' %}" onsubmit="return validatePasswordRegister()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" value="{{request.POST.username}}" placeholder="Tên đăng nhập" required="">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" value="{{request.POST.email}}"  placeholder="Email" required="">
+                </div>
+                <div class="form-group">
+                    <input id="password" name="password" type="password" class="form-control"  placeholder="Mật khẩu" aria-required="true" aria-invalid="true" required>
+                </div>
+                <div class="form-group">
+                    <span id="confirmError" class="text-danger error-message"></span>
+                    <input id="confirm" name="confirm" type="password" class="form-control" placeholder="Nhập lại mật khẩu" aria-required="true" aria-invalid="true" required> 
+                </div>
+                <div class="form-group">
+                    <div class="checkbox i-checks">
+                        <label> 
+                            <input id="agreement" type="checkbox" required>
+                            <i></i>Đồng ý với các điều khoản
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Đăng ký</button>
+
+                <p class="text-muted text-center m-t-sm m-b-sm"><small>Bạn đã có tài khoản?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="{% url 'login' %}">Đăng nhập</a>
+            </form>
+            <p class="m-t"> <small>Bản quyền thuộc Đại học Hạ Long &copy; 2024</small> </p>
+        </div>
+    </div>
+  
+    {% include 'component/script.html' %}
+    
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load static %} {% block main-content%}
+{% include 'component/breadcrumb.html' with title=title %}
+<div class="wrapper wrapper-content  fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                {% for week in weeks %}
+                <h5 class="text-uppercase">Danh sách lịch công tác - Tuần {{ week.week_number }} - Năm {{week.year}} 
+                    ----- Từ ---- {{week.start_date}} ---- Đến ---- {{week.end_date}}</h5>
+                <!-- Thêm thông tin khác tùy theo cần thiết -->
+              {% endfor %}
+                
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a class="changeStatusAll" data-value="2"  data-field ="status" data-model='' >Active toàn bộ</a>
+                        </li>
+                        <li><a class="changeStatusAll" data-value="1" data-field ="status" data-model='' >Unactive toàn bộ</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {% include 'work/schedule/component/filter.html' %}
+                {% include 'work/schedule/component/table.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content%} 
+
+

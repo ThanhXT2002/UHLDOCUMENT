@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block main-content%}
+{% include 'component/breadcrumb.html' with title=title %}
+
+<form action="{% if docu_cate.id %}{% url 'delete_docu_cate' docu_cate.id %}{% endif %}" method="post">
+  {% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="text-right mb15">
+        <button type="submit" class="btn btn-info "><i class="fa fa-plus mr5"></i>Xóa ngay</button>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel-title">Thông tin chung</div>
+            <div class="panel-desription">
+                <p>Bạn có chắc chắn muốn xóa loại văn bản "<strong class="text-danger">{{ docu_cate.document_name}}</strong>" không?</p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row mb15">
+                        <div class="col-lg-12 mb15">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right">Tên loại văn bản
+                                    <span class="text-danger">(*)</span>
+                                </label>
+                                <input type="text" class="form-control" name="document_name" value="{{ docu_cate.document_name }}" required  placeholder="Mời nhập thông tin" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb15">
+                            <div class="form-row">
+                                <label for="" class="control-lable text-right m-t-md">
+                                    Mô tả    
+                                </label>
+                                <input type="text" class="form-control" name="description" value="{{ docu_cate.description }}" placeholder="Mời nhập thông tin" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+{% endblock main-content%}

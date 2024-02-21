@@ -1,0 +1,16 @@
+<!-- breadcrumb_component.html -->
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2><strong>{{ title }}</strong></h2>
+        <ol class="breadcrumb" style="margin-bottom: 10px">
+            <li>
+                {%if user.is_staff%}
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                {% else %}
+                <a href="/">Home</a>
+                {% endif %}
+            </li>
+            <li class="active"><strong>{{ title }}</strong></li>
+        </ol>
+    </div>
+</div>
